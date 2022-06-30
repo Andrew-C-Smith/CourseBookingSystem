@@ -76,4 +76,7 @@ public class Customer {
     public void setAge(int age) {
         this.age = age;
     }
+    public void addBooking(Booking booking) {
+        this.bookings.add(booking);
+    }
 }

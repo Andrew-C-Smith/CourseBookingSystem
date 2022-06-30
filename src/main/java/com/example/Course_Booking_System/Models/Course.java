@@ -78,4 +78,8 @@ public class Course {
     public void setStarRating(StarRating starRating) {
         this.starRating = starRating;
     }
+
+    public void addBooking(Booking booking) {
+        this.bookings.add(booking);
+    }
 }
