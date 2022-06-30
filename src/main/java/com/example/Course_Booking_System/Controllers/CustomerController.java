@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.ServerEndpoint;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,10 +18,16 @@ public class CustomerController {
     CustomerRepository customerRepository;
 
     @GetMapping(value = "/customers")
-    public ResponseEntity<List<Customer>> getAllCustomers(){
+    public ResponseEntity<List<Customer>> getAllCustomers(
+            @RequestParam(name = "course", required = false) String course){
+        if(course != null){
+            return new ResponseEntity(customerRepository.findByBookings_Course_Name(course), HttpStatus.OK);
+        }
         return new ResponseEntity<>(customerRepository.findAll(), HttpStatus.OK);
 
     }
+
+
 
     @GetMapping(value = "/customers/{id}")
     public Optional<Customer> getCustomer(@PathVariable Long id){
